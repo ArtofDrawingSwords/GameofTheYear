@@ -10,7 +10,7 @@ namespace FMG
 		public GameObject levelSelectMenu;
 		public GameObject optionsMenu;
 		public GameObject creditsMenu;
-
+		//public GameObject startMenu;
 		public bool useLevelSelect = true;
 		public bool useExitButton = true;
 
@@ -66,6 +66,10 @@ namespace FMG
 			if(str.Equals("Options"))
 			{
 				Constants.fadeInFadeOut(optionsMenu,mainMenu);
+			}
+			if(str.Equals ("StartMenu"))
+			{
+				Application.LoadLevel("StartMenu");
 			}
 
 
