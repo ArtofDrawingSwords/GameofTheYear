@@ -19,9 +19,19 @@ public class PlayerMovement : MonoBehaviour {
 	float x;
 	float y;
 
+	public Transform groundCheck;
+	public float groundCheckRadius = 0.1f;
+	public LayerMask groundLayer;
+	bool onGround;
+	float idleTimer = 0;
+
 	// Use this for initialization
 	void Start () {
 		skeletonAnimation = GetComponent<SkeletonAnimation>();
+	}
+
+	void FixedUpdate() {
+		onGround = Physics2D.OverlapCircle (groundCheck.position, groundCheckRadius, groundLayer);
 	}
 	
 	// Update is called once per frame
@@ -32,11 +42,19 @@ public class PlayerMovement : MonoBehaviour {
 
 		Vector3 pos = transform.position;
 
+		idleTimer -= Time.deltaTime;
 		//calculates velocity
-		if (Input.GetAxis("Jump") > 0) {
+		if (Input.GetKeyDown("space")) {
 			SetAnimation ("jump", false);
+			gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 300));
+			idleTimer = 0.5f;
 		}
-		else if(x != 0){
+		else if(Input.GetKeyDown("space") && x != 0) {
+			SetAnimation ("jump", false);
+			gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 300));
+			idleTimer = 0.5f;
+		}
+		else if(x != 0 && onGround){
 			if(x > 0)
 				skeletonAnimation.skeleton.flipX = false;
 			else 
@@ -44,7 +62,7 @@ public class PlayerMovement : MonoBehaviour {
 			SetAnimation ("walk", true);
 			horiVelocity = x * maxSpeed * Time.deltaTime;
 		}
-		else {
+		else if(onGround && idleTimer <= 0){
 			SetAnimation ("idle", true);
 		}
 
