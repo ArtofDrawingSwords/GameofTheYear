@@ -1,0 +1,47 @@
+Initialize engine version: 5.1.1f1 (2046fc06d4d8)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 980 (ID=0x13c0)
+    Vendor:   NVIDIA
+    VRAM:     3072 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Melon\Desktop\GOTY\GameofTheYear\GameOfTheYear\testexe_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Melon\Desktop\GOTY\GameofTheYear\GameOfTheYear\testexe_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Melon\Desktop\GOTY\GameofTheYear\GameOfTheYear\testexe_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Melon\Desktop\GOTY\GameofTheYear\GameOfTheYear\testexe_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Melon\Desktop\GOTY\GameofTheYear\GameOfTheYear\testexe_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Melon\Desktop\GOTY\GameofTheYear\GameOfTheYear\testexe_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\Melon\Desktop\GOTY\GameofTheYear\GameOfTheYear\testexe_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\Melon\Desktop\GOTY\GameofTheYear\GameOfTheYear\testexe_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\Melon\Desktop\GOTY\GameofTheYear\GameOfTheYear\testexe_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
+Loading C:\Users\Melon\Desktop\GOTY\GameofTheYear\GameOfTheYear\testexe_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
+- Completed reload, in  0.045 seconds
+desktop: 1920x1080 144Hz; virtual: 5520x1206 at -1680,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+Platform assembly: C:\Users\Melon\Desktop\GOTY\GameofTheYear\GameOfTheYear\testexe_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Melon\Desktop\GOTY\GameofTheYear\GameOfTheYear\testexe_Data\Managed\System.dll (this message is harmless)
+ClickEvent
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+ClickEvent
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+Starting Game...
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+ClickEvent
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 3.569107 ms
+
+Unloading 27 unused Assets to reduce memory usage. Loaded Objects now: 247.
+Total: 0.511379 ms (FindLiveObjects: 0.022031 ms CreateObjectMapping: 0.034133 ms MarkObjects: 0.346298 ms  DeleteObjects: 0.108295 ms)
+
