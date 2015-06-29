@@ -49,18 +49,20 @@ public class PlayerMovement : MonoBehaviour {
 			gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 300));
 			idleTimer = 0.5f;
 		}
-		else if(Input.GetKeyDown("space") && x != 0) {
-			SetAnimation ("jump", false);
-			gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 300));
-			idleTimer = 0.5f;
-		}
 		else if(x != 0 && onGround){
-			if(x > 0)
+			if(x > 0) 
 				skeletonAnimation.skeleton.flipX = false;
 			else 
 				skeletonAnimation.skeleton.flipX = true;
-			SetAnimation ("walk", true);
-			horiVelocity = x * maxSpeed * Time.deltaTime;
+			if(Input.GetKeyDown("space")) {
+				SetAnimation ("jump", false);
+				gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 300));
+				idleTimer = 0.5f;
+			}
+			else{
+				SetAnimation ("walk", true);
+				horiVelocity = x * maxSpeed * Time.deltaTime;
+			}
 		}
 		else if(onGround && idleTimer <= 0){
 			SetAnimation ("idle", true);
