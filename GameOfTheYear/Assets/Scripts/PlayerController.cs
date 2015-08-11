@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
     private float xVelocity;
-
+	public ParticleSystem cloudjump;
     public float moveSpeed;
     public float jumpSpeed;
 
@@ -37,11 +37,13 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Space) && grounded)
         {
             jump();
+			cloudjump.Emit(10);
         }
         if(Input.GetKeyDown(KeyCode.Space) && !doubleJumped && !grounded)
         {
             jump();
             doubleJumped = true;
+			cloudjump.Emit(10);
         }
         if(xVelocity > 0)
         {
