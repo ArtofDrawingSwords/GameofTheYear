@@ -23,6 +23,8 @@ public class AnimationController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        float x = Input.GetAxis("Horizontal");
+        float y = Input.GetAxis("Vertical");
         if (player.grounded)
         {
             {
@@ -34,7 +36,7 @@ public class AnimationController : MonoBehaviour {
         }
         else
         {
-            if (velocity.y > 0)
+            if (y > 0)
                 skeletonAnimation.AnimationName = jumpAnimation;
             else
                 skeletonAnimation.AnimationName = fallAnimation;
