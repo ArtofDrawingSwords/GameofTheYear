@@ -5,6 +5,8 @@ public class AnimationController : MonoBehaviour {
 
     public SkeletonAnimation skeletonAnimation;
 
+    public Transform playerTransform;
+    Quaternion flippedRotation = Quaternion.Euler(0, 180, 0);
     public string idleAnimation = "idle";
     public string walkAnimation = "walk";
     public string runAnimation = "run";
@@ -41,6 +43,11 @@ public class AnimationController : MonoBehaviour {
             else
                 skeletonAnimation.AnimationName = fallAnimation;
         }
+
+        if (x > 0)
+            playerTransform.localRotation = Quaternion.identity;
+        else if (x < 0)
+            playerTransform.localRotation = flippedRotation;
     }
 
     void SetAnimation(string anim, bool loop)

@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour {
 
     private bool doubleJumped;
 
-
 	// Use this for initialization
 	void Start () {
 	
