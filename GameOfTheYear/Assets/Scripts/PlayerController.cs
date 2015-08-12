@@ -1,19 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
 
 public class PlayerController : MonoBehaviour {
 
     private float xVelocity;
-	public ParticleSystem cloudjump;
     public float moveSpeed;
     public float jumpSpeed;
-
     public bool grounded;
     public Transform groundCheck;
     public float groundCheckRadius;
     public LayerMask groundCheckLayerMask;
 
     private bool doubleJumped;
+
+	public ParticleSystem cloudjump;
 
 	// Use this for initialization
 	void Start () {
