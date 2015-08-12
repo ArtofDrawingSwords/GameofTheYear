@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Bounce : MonoBehaviour {
 	private GameObject player;
+	public float powa;
 	// Use this for initialization
 	void Start () {
 		player = GameObject.Find("spineboy");
@@ -16,7 +17,7 @@ public class Bounce : MonoBehaviour {
 	public void OnTriggerEnter2D(Collider2D collider)
 	{
 		if (collider.gameObject.tag == "spineboy") {
-			player.SendMessage("Bounce");
+			player.SendMessage("Bounce", powa);
 		}
 
 	}

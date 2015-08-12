@@ -64,10 +64,10 @@ public class PlayerController : MonoBehaviour {
         GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, jumpSpeed);
     }
 	//Bouncy Platforms
-	public void Bounce()
+	public void Bounce(float powa)
 	{
 		cloudjump.Emit (15);
-		GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, jumpSpeed + 10);
+		GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, jumpSpeed + powa);
 	}
 
 
