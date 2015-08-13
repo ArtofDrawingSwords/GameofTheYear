@@ -105,7 +105,6 @@ public class PlayerController : MonoBehaviour {
 		cloudjump.Emit (15);
 		GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, jumpSpeed + powa);
 	}
-
-
+	
 
 }
