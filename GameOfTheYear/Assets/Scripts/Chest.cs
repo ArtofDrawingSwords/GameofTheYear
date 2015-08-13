@@ -23,6 +23,14 @@ public class Chest : MonoBehaviour {
 		}
 	}
 
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.gameObject.tag == "spineboy" && !Opened)
+        {
+            OpenChest();
+        }
+    }
+
 	void OpenChest()
 	{
 		Opened = true;
