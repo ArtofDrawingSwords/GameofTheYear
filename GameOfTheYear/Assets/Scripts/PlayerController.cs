@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        animator.SetBool("grounded", grounded);
         yVelocity = GetComponent<Rigidbody2D>().velocity.y;
         animator.SetFloat("yVelocity", Mathf.Abs(yVelocity));
 
