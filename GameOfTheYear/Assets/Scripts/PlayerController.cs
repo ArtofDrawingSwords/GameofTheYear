@@ -5,21 +5,27 @@ using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour {
 
-    private float xVelocity;
+    private float xMovement;
     public float moveSpeed;
     public float jumpSpeed;
     public bool grounded;
     public Transform groundCheck;
     public float groundCheckRadius;
     public LayerMask groundCheckLayerMask;
+    public Animator animator;
+
+    public float yVelocity;
 
     private bool doubleJumped;
 
 	public ParticleSystem cloudjump;
 
-	// Use this for initialization
-	void Start () {
-	
+    public Transform playerTransform;
+    Quaternion flippedRotation = Quaternion.Euler(0, 180, 0);
+
+    // Use this for initialization
+    void Start () {
+	    
 	}
 
     void FixedUpdate()
@@ -30,9 +36,13 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        xVelocity = Input.GetAxis("Horizontal");
-            
-        if(grounded)
+        yVelocity = GetComponent<Rigidbody2D>().velocity.y;
+        animator.SetFloat("yVelocity", Mathf.Abs(yVelocity));
+
+        xMovement = Input.GetAxis("Horizontal");
+        animator.SetFloat("xSpeed", Mathf.Abs(xMovement));
+
+        if (grounded)
         {
             doubleJumped = false;
         }
@@ -47,17 +57,22 @@ public class PlayerController : MonoBehaviour {
             doubleJumped = true;
 			cloudjump.Emit(10);
         }
-        if(xVelocity > 0)
+        if(xMovement > 0)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
         }
 
-        if(xVelocity < 0)
+        if(xMovement < 0)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
         }
-	
-	}
+
+        if (xMovement > 0)
+            playerTransform.localRotation = Quaternion.identity;
+        else if (xMovement < 0)
+            playerTransform.localRotation = flippedRotation;
+
+    }
 
     private void jump()
     {
