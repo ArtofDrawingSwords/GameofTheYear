@@ -6,7 +6,7 @@ public class Bounce : MonoBehaviour {
 	public float powa;
 	// Use this for initialization
 	void Start () {
-		player = GameObject.Find("spineboy");
+		player = GameObject.Find("KilluaPlayer");
 	}
 	
 	// Update is called once per frame

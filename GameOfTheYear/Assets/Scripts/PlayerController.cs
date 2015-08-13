@@ -20,12 +20,13 @@ public class PlayerController : MonoBehaviour {
 
 	public ParticleSystem cloudjump;
 
+    private bool facingRight;
     public Transform playerTransform;
     Quaternion flippedRotation = Quaternion.Euler(0, 180, 0);
 
     // Use this for initialization
     void Start () {
-	    
+        facingRight = true;
 	}
 
     void FixedUpdate()
@@ -60,17 +61,36 @@ public class PlayerController : MonoBehaviour {
         if(xMovement > 0)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+            if(!facingRight)
+            {
+                Vector3 theScale = transform.localScale;
+                theScale.x *= -1;
+                transform.localScale = theScale;
+                transform.position = new Vector2(transform.position.x - 1.19f, transform.position.y);
+                facingRight = true;
+            }
         }
 
         if(xMovement < 0)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+            if(facingRight)
+            {
+                Vector3 theScale = transform.localScale;
+                theScale.x *= -1;
+                transform.localScale = theScale;
+                transform.position = new Vector2(transform.position.x + 1.19f, transform.position.y);
+                facingRight = false;
+            }
         }
 
+        //flips player
+        /*
         if (xMovement > 0)
             playerTransform.localRotation = Quaternion.identity;
         else if (xMovement < 0)
             playerTransform.localRotation = flippedRotation;
+            */
 
     }
 

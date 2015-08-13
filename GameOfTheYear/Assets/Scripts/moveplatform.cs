@@ -14,7 +14,7 @@ public class moveplatform : MonoBehaviour {
 	void Start () {
 		defaultlocation = this.transform .position;
 		endlocation = movehere.position;
-		spineboy = GameObject.Find ("spineboy");
+		spineboy = GameObject.Find ("KilluaPlayer");
 	}
 	
 	// Update is called once per frame
