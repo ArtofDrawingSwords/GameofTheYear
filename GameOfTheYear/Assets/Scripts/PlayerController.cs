@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour {
     private float xMovement;
     public float moveSpeed;
     public float jumpSpeed;
+    private float moveVelocity;
     public bool grounded;
     public Transform groundCheck;
     public float groundCheckRadius;
@@ -88,9 +89,13 @@ public class PlayerController : MonoBehaviour {
             doubleJumped = true;
 			cloudjump.Emit(10);
         }
+
+        if(grounded)
+            moveVelocity = 0f;
+
         if(xMovement > 0)
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+            moveVelocity = moveSpeed;
             if(!facingRight)
             {
                 Vector3 theScale = transform.localScale;
@@ -105,7 +110,7 @@ public class PlayerController : MonoBehaviour {
 
         if(xMovement < 0)
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+            moveVelocity = -moveSpeed;
             if(facingRight)
             {
                 
@@ -118,6 +123,8 @@ public class PlayerController : MonoBehaviour {
                 facingRight = false;
             }
         }
+
+        GetComponent<Rigidbody2D>().velocity = new Vector2(moveVelocity, GetComponent<Rigidbody2D>().velocity.y);
 
         //flips player
         /*
