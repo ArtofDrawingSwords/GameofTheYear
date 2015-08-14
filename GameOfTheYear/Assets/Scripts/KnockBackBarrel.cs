@@ -15,7 +15,7 @@ public class KnockBackBarrel : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D coll)
 	{
-		if (coll.gameObject.tag == "spineboy")
+        if ((coll.gameObject.GetComponent("PlayerController") as PlayerController) != null)
 		{
 			Knockback(coll.transform);
 		}

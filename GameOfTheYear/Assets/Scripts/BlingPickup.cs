@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class BlingPickup : MonoBehaviour {
-	private bool Blinged;//Got Em!
+	private bool Blinged;
 	public GameObject Sprite;
 	public ParticleSystem Particles;
 	public SpriteRenderer SpriteRender;
-
-	private God BlingMe;
 	// Use this for initialization
 	void Start () {
 	
@@ -19,16 +18,12 @@ public class BlingPickup : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D coll) {
-		if (coll.gameObject.tag == "spineboy" && Blinged == false) {
+        if ((coll.gameObject.GetComponent("PlayerController") as PlayerController) != null && Blinged == false) {
 			Blinged = true;
 			SpriteRender.enabled = false;
 			Particles.Emit(10);
 			Invoke ("DestroyMe", 0.5f);
-			if(BlingMe == null)
-			{
-				BlingMe = GameObject.FindGameObjectWithTag ("God").GetComponent<God>();
-			}
-			BlingMe.Blingerino();
+            God.Kamisama.Blingerino();
 		}
 	}
 	void DestroyMe(){

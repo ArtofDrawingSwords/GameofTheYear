@@ -9,19 +9,21 @@ public class CameraFollow : MonoBehaviour
 	public float ycameraspeed = 6f;		
 	public Vector2 maximumXY;		
 	public Vector2 minimumXY;		
-	private Transform spineboy;		
+	private Transform Player;
+    private GameObject Killua;
 	
 	void Awake ()
 	{
-		spineboy = GameObject.FindGameObjectWithTag("spineboy").transform;
+        Player = GameObject.Find("KilluaPlayer").transform;
+       
 	}
 	bool playermaxmoveX()
 	{
-		return Mathf.Abs(transform.position.x - spineboy.position.x) > xbeforemove;
+        return Mathf.Abs(transform.position.x - Player.position.x) > xbeforemove;
 	}
 	bool playermaxmoveY()
 	{
-		return Mathf.Abs(transform.position.y - spineboy.position.y) > ybeforemove;
+        return Mathf.Abs(transform.position.y - Player.position.y) > ybeforemove;
 	}
 	void FixedUpdate ()
 	{
@@ -32,9 +34,9 @@ public class CameraFollow : MonoBehaviour
 		float playerx = transform.position.x;
 		float playery = transform.position.y;
 			if(playermaxmoveX())
-			playerx = Mathf.Lerp(transform.position.x, spineboy.position.x, xcameraspeed * Time.deltaTime);
+                playerx = Mathf.Lerp(transform.position.x, Player.position.x, xcameraspeed * Time.deltaTime);
 			if(playermaxmoveY())
-			playery = Mathf.Lerp(transform.position.y, spineboy.position.y, ycameraspeed * Time.deltaTime);
+                playery = Mathf.Lerp(transform.position.y, Player.position.y, ycameraspeed * Time.deltaTime);
 				playerx = Mathf.Clamp(playerx, minimumXY.x, maximumXY.x);
 				playery = Mathf.Clamp(playery, minimumXY.y, maximumXY.y);
 				transform.position = new Vector3(playerx, playery, transform.position.z);

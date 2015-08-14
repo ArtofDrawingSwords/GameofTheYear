@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class Bounce : MonoBehaviour {
-	private GameObject player;
+    private GameObject Killua;
 	public float powa;
 	// Use this for initialization
 	void Start () {
-		player = GameObject.Find("KilluaPlayer");
+		Killua = GameObject.Find("KilluaPlayer");
 	}
 	
 	// Update is called once per frame
@@ -16,8 +16,8 @@ public class Bounce : MonoBehaviour {
 
 	public void OnTriggerEnter2D(Collider2D collider)
 	{
-		if (collider.gameObject.tag == "spineboy") {
-			player.SendMessage("Bounce", powa);
+       if ((collider.gameObject.GetComponent("PlayerController") as PlayerController) != null) {
+            Killua.GetComponent<PlayerController>().Bounce(powa);
 		}
 
 	}

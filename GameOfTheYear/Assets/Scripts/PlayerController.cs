@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 
 public class PlayerController : MonoBehaviour {
-
+    public static PlayerController Killua;
     private float xMovement;
     public float moveSpeed;
     public float jumpSpeed;

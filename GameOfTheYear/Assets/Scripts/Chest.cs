@@ -5,10 +5,9 @@ using System.Collections;
 public class Chest : MonoBehaviour {
 	public Sprite ChestOpenSprite;
 	private bool Opened;
-	private God God;
 	// Use this for initialization
 	void Start () {
-	
+     
 	}
 	
 	// Update is called once per frame
@@ -18,16 +17,20 @@ public class Chest : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D coll)
 	{
-		if (coll.gameObject .tag == "spineboy" && !Opened) {
-			OpenChest ();
+        /*  -- Changed to Trigger, we don't need this :> --
+		if (coll.gameObject.tag == "spineboy" && !Opened) {
+        OpenChest ();
 		}
+        */
 	}
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        if (coll.gameObject.tag == "spineboy" && !Opened)
+        if ((coll.gameObject.GetComponent("PlayerController") as PlayerController) != null && !Opened)
         {
-            OpenChest();
+            {
+                OpenChest();
+            }
         }
     }
 
@@ -35,10 +38,6 @@ public class Chest : MonoBehaviour {
 	{
 		Opened = true;
 		GetComponent<SpriteRenderer>().sprite = ChestOpenSprite;
-		if (God == null)
-		{
-			God = GameObject.FindGameObjectWithTag ("God").GetComponent<God>();
-		}
-		God.Chesterino();
+        God.Kamisama.Chesterino();
 	}
 }
