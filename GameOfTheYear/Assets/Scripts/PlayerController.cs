@@ -24,6 +24,11 @@ public class PlayerController : MonoBehaviour {
     public Transform playerTransform;
     Quaternion flippedRotation = Quaternion.Euler(0, 180, 0);
 
+    //doubletap
+    float doubleTapTimerD;
+    float doubleTapTimerA;
+    float doubleTapDelay;
+
     // Use this for initialization
     void Start () {
         facingRight = true;
@@ -44,6 +49,30 @@ public class PlayerController : MonoBehaviour {
         xMovement = Input.GetAxis("Horizontal");
         animator.SetFloat("xSpeed", Mathf.Abs(xMovement));
 
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            if (Time.time < doubleTapTimerD + .3f && Time.time > (doubleTapDelay + 0.5f))
+            {
+                transform.position = new Vector2(transform.position.x + 5, transform.position.y);
+                doubleTapDelay = Time.time;
+            }
+            else
+            {
+                doubleTapTimerD = Time.time;
+            }
+        }
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            if(Time.time < doubleTapTimerA + .3f && Time.time > (doubleTapDelay + 0.5f))
+            {
+                transform.position = new Vector2(transform.position.x - 5, transform.position.y);
+                doubleTapDelay = Time.time;
+            }
+            else
+            {
+                doubleTapTimerA = Time.time;
+            }
+        }
         if (grounded)
         {
             doubleJumped = false;
@@ -67,7 +96,9 @@ public class PlayerController : MonoBehaviour {
                 Vector3 theScale = transform.localScale;
                 theScale.x *= -1;
                 transform.localScale = theScale;
-                transform.position = new Vector2(transform.position.x - 1.19f, transform.position.y);
+                transform.position = new Vector2(transform.position.x - 1.0f, transform.position.y);
+                
+                //transform.localScale = new Vector3(0.5f, 0.5f, 1f);
                 facingRight = true;
             }
         }
@@ -77,10 +108,13 @@ public class PlayerController : MonoBehaviour {
             GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
             if(facingRight)
             {
+                
                 Vector3 theScale = transform.localScale;
                 theScale.x *= -1;
                 transform.localScale = theScale;
-                transform.position = new Vector2(transform.position.x + 1.19f, transform.position.y);
+                transform.position = new Vector2(transform.position.x + 1.0f, transform.position.y);
+                
+                //transform.localScale = new Vector3(-0.5f, 0.5f, 1f);
                 facingRight = false;
             }
         }

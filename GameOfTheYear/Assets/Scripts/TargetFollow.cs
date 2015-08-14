@@ -51,10 +51,7 @@ public class TargetFollow : MonoBehaviour {
         {
             if (!facingRight)
             {
-                Vector3 theScale = transform.localScale;
-                theScale.x *= -1;
-                transform.localScale = theScale;
-                transform.position = new Vector2(transform.position.x - .88f, transform.position.y);
+                transform.localScale = new Vector3(1f, 1f, 1f);
                 facingRight = true;
             }
         }
@@ -63,10 +60,7 @@ public class TargetFollow : MonoBehaviour {
         {
             if (facingRight)
             {
-                Vector3 theScale = transform.localScale;
-                theScale.x *= -1;
-                transform.localScale = theScale;
-                transform.position = new Vector2(transform.position.x + .88f, transform.position.y);
+                transform.localScale = new Vector3(-1f, 1f, 1f);
                 facingRight = false;
             }
         }
