@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour {
         {
             if (Time.time < doubleTapTimerD + .3f && Time.time > (doubleTapDelay + 0.5f))
             {
+                Debug.Log("Player dashed right.");
                 transform.position = new Vector2(transform.position.x + 5, transform.position.y);
                 doubleTapDelay = Time.time;
             }
@@ -66,6 +67,7 @@ public class PlayerController : MonoBehaviour {
         {
             if(Time.time < doubleTapTimerA + .3f && Time.time > (doubleTapDelay + 0.5f))
             {
+                Debug.Log("Player dashed left.");
                 transform.position = new Vector2(transform.position.x - 5, transform.position.y);
                 doubleTapDelay = Time.time;
             }
