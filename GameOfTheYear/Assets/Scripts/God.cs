@@ -2,13 +2,19 @@
 using System.Collections;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
 using System.IO;
 public class God : MonoBehaviour {
+    private GameObject Killua;
 	public float BlingCount;
     public float ChestCount;
     public float SwitchCount;
+    public float DeathCount;
+    public GameObject lastcheckpoint;
+    //private Vector3 checkpoint;
     public static God Kamisama;
     public string FileName = "Kamisama";
+    public string checkpoint;
 	// Use this for initialization
     void Awake()
     {
@@ -23,32 +29,54 @@ public class God : MonoBehaviour {
         }
     }
 	void Start () {
-      
+        Killua = GameObject.Find("KilluaPlayer");
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
         if (Input.GetKeyDown(KeyCode.Keypad8))
         {
+            SaveCheckPoint();
             SaveData(); 
         }
         if (Input.GetKeyDown(KeyCode.Keypad9))
         {
             LoadData();
+            LoadCheckPoint();
         }
 	}
+
+    public void SaveCheckPoint()
+    {
+        checkpoint = lastcheckpoint.name;
+    }
+
+    public void LoadCheckPoint()
+    {
+        Killua.GetComponent<PlayerHealth>().lastcheckpoint = GameObject.Find(checkpoint);
+        Killua.transform.position = GameObject.Find(checkpoint).transform.position;
+    }
 
     public void SaveData()
     {
         Debug.Log("PlayerInfo Saved");
         BinaryFormatter bf = new BinaryFormatter();
+        SurrogateSelector ss = new SurrogateSelector();
         FileStream file = File.Create(Application.persistentDataPath + "/" + FileName + ".dat");
+        //
+        Vector3SerializationSurrogate v3ss = new Vector3SerializationSurrogate();
+        ss.AddSurrogate(typeof(Vector3),
+                         new StreamingContext(StreamingContextStates.All),
+                         v3ss);
+        bf.SurrogateSelector = ss;
         //
         PlayerData data = new PlayerData();
         data.BlingCount = BlingCount;
         data.ChestCount = ChestCount;
         data.SwitchCount = SwitchCount;
-
+        data.DeathCount = DeathCount;
+        data.checkpoint = checkpoint;
         //
         bf.Serialize(file, data);
         file.Close();
@@ -60,6 +88,7 @@ public class God : MonoBehaviour {
         if (File.Exists(Application.persistentDataPath + "/" + FileName + ".dat"))
         {
             BinaryFormatter bf = new BinaryFormatter();
+
             FileStream file = File.Open(Application.persistentDataPath + "/" + FileName + ".dat", FileMode.Open);
             PlayerData data = (PlayerData)bf.Deserialize(file);
             file.Close();
@@ -67,6 +96,8 @@ public class God : MonoBehaviour {
             BlingCount = data.BlingCount;
             ChestCount = data.ChestCount;
             SwitchCount = data.SwitchCount;
+            DeathCount = data.DeathCount;
+            checkpoint = data.checkpoint;
         }
     }
 
@@ -82,6 +113,11 @@ public class God : MonoBehaviour {
 		Debug.Log ("Switch!");
 		SwitchCount += 1;
 	}
+    public void Deaderino()
+    {
+        Debug.Log("Died!");
+        DeathCount += 1;
+    }
 
 	private bool DeveloperButtons = true;
 	private string FirstFloor = "Teleport to 1st Floor";
@@ -130,10 +166,43 @@ public class God : MonoBehaviour {
 
 }
 
+sealed class Vector3SerializationSurrogate : ISerializationSurrogate
+{
+
+    public void GetObjectData(System.Object obj,
+                              SerializationInfo info, StreamingContext context)
+    {
+
+        Vector3 v3 = (Vector3)obj;
+        info.AddValue("x", v3.x);
+        info.AddValue("y", v3.y);
+        info.AddValue("z", v3.z);
+        Debug.Log(v3);
+    }
+
+
+    public System.Object SetObjectData(System.Object obj,
+                                       SerializationInfo info, StreamingContext context,
+                                       ISurrogateSelector selector)
+    {
+
+        Vector3 v3 = (Vector3)obj;
+        v3.x = (float)info.GetValue("x", typeof(float));
+        v3.y = (float)info.GetValue("y", typeof(float));
+        v3.z = (float)info.GetValue("z", typeof(float));
+        obj = v3;
+        return obj;  
+    }
+}
+
 [Serializable]
 class PlayerData
 {
     public float BlingCount;
     public float ChestCount;
     public float SwitchCount;
+    public float DeathCount;
+    public string checkpoint;
+    // public Vector3 checkpoint;
+    //public Transform chkpt = GameObject.Find("KilluaPlayer").transform;
 }

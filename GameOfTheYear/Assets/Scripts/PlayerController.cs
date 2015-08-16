@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour {
     private bool doubleJumped;
 
 	public ParticleSystem cloudjump;
+ 
+
 
     private bool facingRight;
     public Transform playerTransform;
